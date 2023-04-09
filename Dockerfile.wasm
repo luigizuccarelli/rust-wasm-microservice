@@ -1,0 +1,4 @@
+FROM scratch
+COPY ./target/wasm32-wasi/debug/rust-wasm-microservice.wasm /microservice.wasm
+EXPOSE 8080
+ENTRYPOINT [ "microservice.wasm" ]
