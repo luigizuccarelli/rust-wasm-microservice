@@ -95,3 +95,48 @@ target/x86_64-unknown-linux-gnu/release/drill  --benchmark benchmark.yaml --stat
 Update the benchmark file to create more load (change concurrency & iterations)
 
 - be amazed
+
+## Results (without wasm - native on host)
+
+Using 100 concurrent connections and 4200 iterations
+
+```bash
+
+$ target/release/drill  --benchmark config.yaml --stats --quiet
+
+Concurrency 100
+Iterations 4200
+Rampup 2
+Base URL http://192.168.0.29:8080
+
+
+POSTJSON                  Total requests            4200
+POSTJSON                  Successful requests       4200
+POSTJSON                  Failed requests           0
+POSTJSON                  Median time per request   1ms
+POSTJSON                  Average time per request  1ms
+POSTJSON                  Sample standard deviation 1ms
+POSTJSON                  99.0'th percentile        5ms
+POSTJSON                  99.5'th percentile        5ms
+POSTJSON                  99.9'th percentile        6ms
+
+Time taken for tests      0.1 seconds
+Total requests            4200
+Successful requests       4200
+Failed requests           0
+Requests per second       28674.44 [#/sec]
+Median time per request   1ms
+Average time per request  1ms
+Sample standard deviation 1ms
+99.0'th percentile        5ms
+99.5'th percentile        5ms
+99.9'th percentile        6ms
+
+
+```
+
+Without fine tuning (use string buffers instead of deserializing & serializing json paylods)
+
+Tested on amd ryzen9 with 32G RAM - 28674 requests/sec
+
+This is extremely performant
