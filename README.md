@@ -140,3 +140,11 @@ Without fine tuning (use string buffers instead of deserializing & serializing j
 Tested on amd ryzen9 with 32G RAM - 28674 requests/sec
 
 This is extremely performant
+
+## Docker Build
+
+There are 2 dockerfiles in the repo one to build a minimal wasm container
+and another to build a minimal container with glibc dependencies for the rust binary
+
+The later has a size of around 32MB which is extremely light. I also did some profile testing on it
+with results very similar to the raw native verison but with a performance hit of around 20% (using podman run)
